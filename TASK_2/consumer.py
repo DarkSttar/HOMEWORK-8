@@ -24,10 +24,12 @@ def callback(ch, method, properties, body):
         contact.update(is_send_massage=True)
         print(f"Received message for contact: {contact.full_name}")
     except DoesNotExist:
-        print(f'Contact with ID: {object_id} not found in the database.')
+        print(f"Contact with ID: {object_id} not found in the database.")
 
 
-channel.basic_consume(queue="contact_queue", on_message_callback=callback, auto_ack=True)
+channel.basic_consume(
+    queue="contact_queue", on_message_callback=callback, auto_ack=True
+)
 
 
 if __name__ == "__main__":
